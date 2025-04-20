@@ -1,0 +1,30 @@
+{
+  "collectionName": "components_elements_videos",
+  "info": {
+    "displayName": "Video",
+    "description": "Individual video item"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "videoUrl": {
+      "type": "string",
+      "required": true
+    },
+    "duration": {
+      "type": "string"
+    },
+    "views": {
+      "type": "string"
+    }
+  }
+} 

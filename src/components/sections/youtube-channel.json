@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_sections_youtube_channels",
+  "info": {
+    "displayName": "YouTube Channel",
+    "description": "YouTube video gallery section"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "videos": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.video",
+      "required": true,
+      "min": 1
+    },
+    "channelUrl": {
+      "type": "string",
+      "required": true
+    }
+  }
+} 

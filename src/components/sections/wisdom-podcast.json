@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_sections_wisdom_podcasts",
+  "info": {
+    "displayName": "Wisdom Podcast",
+    "description": "Wisdom podcast section"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "podcastUrl": {
+      "type": "string",
+      "required": true
+    },
+    "episodes": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.podcast-episode"
+    }
+  }
+} 

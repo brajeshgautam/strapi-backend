@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_sections_shows",
+  "info": {
+    "displayName": "Show",
+    "description": "Show section with image and description"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "buttonText": {
+      "type": "string",
+      "default": "Read More"
+    },
+    "buttonLink": {
+      "type": "string",
+      "required": true
+    }
+  }
+} 

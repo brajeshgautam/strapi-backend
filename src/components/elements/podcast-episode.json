@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_elements_podcast_episodes",
+  "info": {
+    "displayName": "Podcast Episode",
+    "description": "Individual podcast episode"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "duration": {
+      "type": "string"
+    },
+    "episodeUrl": {
+      "type": "string",
+      "required": true
+    },
+    "date": {
+      "type": "datetime",
+      "required": true
+    }
+  }
+} 

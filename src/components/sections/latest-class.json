@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_sections_latest_classes",
+  "info": {
+    "displayName": "Latest Class",
+    "description": "Latest class section with thumbnail and details"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "videoUrl": {
+      "type": "string",
+      "required": true
+    },
+    "date": {
+      "type": "datetime",
+      "required": true
+    }
+  }
+} 

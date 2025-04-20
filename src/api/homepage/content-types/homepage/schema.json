@@ -1,0 +1,56 @@
+{
+  "kind": "singleType",
+  "collectionName": "homepages",
+  "info": {
+    "singularName": "homepage",
+    "pluralName": "homepages",
+    "displayName": "Homepage",
+    "description": "Configure the homepage content"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "hero": {
+      "type": "component",
+      "repeatable": false,
+      "component": "sections.hero"
+    },
+    "show": {
+      "type": "component",
+      "repeatable": false,
+      "component": "sections.show"
+    },
+    "latestClass": {
+      "type": "component",
+      "repeatable": false,
+      "component": "sections.latest-class"
+    },
+    "gemstones": {
+      "type": "component",
+      "repeatable": false,
+      "component": "sections.gemstones"
+    },
+    "quote": {
+      "type": "component",
+      "repeatable": false,
+      "component": "sections.quote"
+    },
+    "youtubeChannel": {
+      "type": "component",
+      "repeatable": false,
+      "component": "sections.youtube-channel"
+    },
+    "socialMediaFeed": {
+      "type": "component",
+      "repeatable": false,
+      "component": "sections.social-media-feed"
+    },
+    "wisdomPodcast": {
+      "type": "component",
+      "repeatable": false,
+      "component": "sections.wisdom-podcast"
+    }
+  }
+}

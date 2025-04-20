@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_sections_social_media_feeds",
+  "info": {
+    "displayName": "Social Media Feed",
+    "description": "Social media feed section"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "posts": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.social-post",
+      "required": true,
+      "min": 1
+    }
+  }
+} 

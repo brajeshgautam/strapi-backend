@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_elements_gemstones",
+  "info": {
+    "displayName": "Gemstone",
+    "description": "Individual gemstone item"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "description": {
+      "type": "text"
+    },
+    "link": {
+      "type": "string"
+    }
+  }
+} 

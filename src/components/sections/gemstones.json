@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_sections_gemstones",
+  "info": {
+    "displayName": "Gemstones",
+    "description": "Gemstones carousel section"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "stones": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.gemstone",
+      "required": true,
+      "min": 1
+    }
+  }
+} 
