@@ -9,12 +9,13 @@
     "develop": "strapi develop",
     "seed:example": "node ./scripts/seed.js",
     "start": "strapi start",
-    "strapi": "strapi"
+    "strapi": "strapi",
+    "prebuild": "cd src/plugins/ && npm run build"
   },
   "dependencies": {
-    "@strapi/plugin-cloud": "5.11.0",
-    "@strapi/plugin-users-permissions": "5.11.0",
-    "@strapi/strapi": "5.11.0",
+    "@strapi/plugin-cloud": "5.12.5",
+    "@strapi/plugin-users-permissions": "5.12.5",
+    "@strapi/strapi": "5.12.5",
     "better-sqlite3": "11.3.0",
     "fs-extra": "^10.0.0",
     "mime-types": "^2.1.27",
