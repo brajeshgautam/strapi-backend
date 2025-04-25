@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_elements_social_links",
+  "info": {
+    "displayName": "Social Links",
+    "description": "Social media links for header"
+  },
+  "options": {},
+  "attributes": {
+    "facebook": {
+      "type": "string",
+      "required": true
+    },
+    "instagram": {
+      "type": "string",
+      "required": true
+    },
+    "youtube": {
+      "type": "string",
+      "required": true
+    }
+  }
+} 

@@ -1,5 +1,45 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface ElementsContactInfo extends Struct.ComponentSchema {
+  collectionName: 'components_elements_contact_infos';
+  info: {
+    description: 'Contact information for header';
+    displayName: 'Contact Info';
+  };
+  attributes: {
+    email: Schema.Attribute.Email &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'info@brajeshgautam.com'>;
+    phone: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'+91 9717194880'>;
+    phoneHours: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'12:00 - 5:00'>;
+  };
+}
+
+export interface ElementsDropdownItem extends Struct.ComponentSchema {
+  collectionName: 'components_elements_dropdown_items';
+  info: {
+    description: 'Dropdown menu item';
+    displayName: 'Dropdown Item';
+  };
+  attributes: {
+    isExternal: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    order: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
+    url: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface ElementsGemstone extends Struct.ComponentSchema {
   collectionName: 'components_elements_gemstones';
   info: {
@@ -11,6 +51,43 @@ export interface ElementsGemstone extends Struct.ComponentSchema {
     image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     link: Schema.Attribute.String;
     name: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ElementsLanguage extends Struct.ComponentSchema {
+  collectionName: 'components_elements_languages';
+  info: {
+    description: 'Language selection option';
+    displayName: 'Language';
+  };
+  attributes: {
+    code: Schema.Attribute.String & Schema.Attribute.Required;
+    isDefault: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ElementsMenuItem extends Struct.ComponentSchema {
+  collectionName: 'components_elements_menu_items';
+  info: {
+    description: 'Navigation menu item';
+    displayName: 'Menu Item';
+  };
+  attributes: {
+    dropdownItems: Schema.Attribute.Component<'elements.dropdown-item', true>;
+    hasDropdown: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    highlight: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    isExternal: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    order: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
+    url: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -26,6 +103,19 @@ export interface ElementsPodcastEpisode extends Struct.ComponentSchema {
     duration: Schema.Attribute.String;
     episodeUrl: Schema.Attribute.String & Schema.Attribute.Required;
     title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ElementsSocialLinks extends Struct.ComponentSchema {
+  collectionName: 'components_elements_social_links';
+  info: {
+    description: 'Social media links for header';
+    displayName: 'Social Links';
+  };
+  attributes: {
+    facebook: Schema.Attribute.String & Schema.Attribute.Required;
+    instagram: Schema.Attribute.String & Schema.Attribute.Required;
+    youtube: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -258,8 +348,13 @@ export interface SharedSlider extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'elements.contact-info': ElementsContactInfo;
+      'elements.dropdown-item': ElementsDropdownItem;
       'elements.gemstone': ElementsGemstone;
+      'elements.language': ElementsLanguage;
+      'elements.menu-item': ElementsMenuItem;
       'elements.podcast-episode': ElementsPodcastEpisode;
+      'elements.social-links': ElementsSocialLinks;
       'elements.social-post': ElementsSocialPost;
       'elements.video': ElementsVideo;
       'sections.gemstones': SectionsGemstones;

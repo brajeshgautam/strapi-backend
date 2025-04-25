@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_elements_contact_infos",
+  "info": {
+    "displayName": "Contact Info",
+    "description": "Contact information for header"
+  },
+  "options": {},
+  "attributes": {
+    "phone": {
+      "type": "string",
+      "required": true,
+      "default": "+91 9717194880"
+    },
+    "phoneHours": {
+      "type": "string",
+      "required": true,
+      "default": "12:00 - 5:00"
+    },
+    "email": {
+      "type": "email",
+      "required": true,
+      "default": "info@brajeshgautam.com"
+    }
+  }
+} 

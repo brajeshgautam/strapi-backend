@@ -1,0 +1,41 @@
+{
+  "collectionName": "components_elements_menu_items",
+  "info": {
+    "displayName": "Menu Item",
+    "description": "Navigation menu item"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "url": {
+      "type": "string",
+      "required": true
+    },
+    "isExternal": {
+      "type": "boolean",
+      "default": false
+    },
+    "order": {
+      "type": "integer",
+      "required": true,
+      "min": 1
+    },
+    "hasDropdown": {
+      "type": "boolean",
+      "default": false
+    },
+    "dropdownItems": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.dropdown-item"
+    },
+    "highlight": {
+      "type": "boolean",
+      "default": false,
+      "description": "Highlight items like 'New'"
+    }
+  }
+} 

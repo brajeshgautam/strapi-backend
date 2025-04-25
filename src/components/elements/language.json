@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_elements_languages",
+  "info": {
+    "displayName": "Language",
+    "description": "Language selection option"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "code": {
+      "type": "string",
+      "required": true
+    },
+    "isDefault": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+} 
