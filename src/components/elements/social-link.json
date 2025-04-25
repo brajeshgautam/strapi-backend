@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_elements_footer_social_links",
+  "info": {
+    "displayName": "Footer Social Link",
+    "description": "Individual social media link for footer"
+  },
+  "options": {},
+  "attributes": {
+    "platform": {
+      "type": "enumeration",
+      "enum": ["facebook", "instagram", "youtube"],
+      "required": true
+    },
+    "url": {
+      "type": "string",
+      "required": true
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    }
+  }
+} 

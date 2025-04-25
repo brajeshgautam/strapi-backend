@@ -40,6 +40,27 @@ export interface ElementsDropdownItem extends Struct.ComponentSchema {
   };
 }
 
+export interface ElementsFooterLink extends Struct.ComponentSchema {
+  collectionName: 'components_elements_footer_links';
+  info: {
+    description: 'Individual footer link item';
+    displayName: 'Footer Link';
+  };
+  attributes: {
+    isExternal: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    order: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
+    url: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface ElementsGemstone extends Struct.ComponentSchema {
   collectionName: 'components_elements_gemstones';
   info: {
@@ -106,6 +127,22 @@ export interface ElementsPodcastEpisode extends Struct.ComponentSchema {
   };
 }
 
+export interface ElementsSocialLink extends Struct.ComponentSchema {
+  collectionName: 'components_elements_footer_social_links';
+  info: {
+    description: 'Individual social media link for footer';
+    displayName: 'Footer Social Link';
+  };
+  attributes: {
+    icon: Schema.Attribute.Media<'images'>;
+    platform: Schema.Attribute.Enumeration<
+      ['facebook', 'instagram', 'youtube']
+    > &
+      Schema.Attribute.Required;
+    url: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface ElementsSocialLinks extends Struct.ComponentSchema {
   collectionName: 'components_elements_social_links';
   info: {
@@ -149,6 +186,82 @@ export interface ElementsVideo extends Struct.ComponentSchema {
     title: Schema.Attribute.String & Schema.Attribute.Required;
     videoUrl: Schema.Attribute.String & Schema.Attribute.Required;
     views: Schema.Attribute.String;
+  };
+}
+
+export interface SectionsFooterColumn extends Struct.ComponentSchema {
+  collectionName: 'components_sections_footer_columns';
+  info: {
+    description: 'A column of links in the footer';
+    displayName: 'Footer Column';
+  };
+  attributes: {
+    links: Schema.Attribute.Component<'elements.footer-link', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SectionsFooterContact extends Struct.ComponentSchema {
+  collectionName: 'components_sections_footer_contacts';
+  info: {
+    description: 'Contact information in footer';
+    displayName: 'Footer Contact';
+  };
+  attributes: {
+    address: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Vikaspuri, Delhi - 110018'>;
+    email: Schema.Attribute.Email & Schema.Attribute.Required;
+    phone: Schema.Attribute.String & Schema.Attribute.Required;
+    phoneHours: Schema.Attribute.String & Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'CONTACT US'>;
+  };
+}
+
+export interface SectionsFooterCopyright extends Struct.ComponentSchema {
+  collectionName: 'components_sections_footer_copyrights';
+  info: {
+    description: 'Copyright and credits section';
+    displayName: 'Footer Copyright';
+  };
+  attributes: {
+    copyrightText: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Copyright \u00A9 2023-2025 Brajesh Gautam. All Rights Reserved'>;
+    developerCredit: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Designed & Developed By SLN Softwares'>;
+    developerUrl: Schema.Attribute.String;
+  };
+}
+
+export interface SectionsFooterSocial extends Struct.ComponentSchema {
+  collectionName: 'components_sections_footer_socials';
+  info: {
+    description: 'Social media section in footer';
+    displayName: 'Footer Social';
+  };
+  attributes: {
+    socialLinks: Schema.Attribute.Component<'elements.social-link', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'FOLLOW US ON'>;
   };
 }
 
@@ -350,13 +463,19 @@ declare module '@strapi/strapi' {
     export interface ComponentSchemas {
       'elements.contact-info': ElementsContactInfo;
       'elements.dropdown-item': ElementsDropdownItem;
+      'elements.footer-link': ElementsFooterLink;
       'elements.gemstone': ElementsGemstone;
       'elements.language': ElementsLanguage;
       'elements.menu-item': ElementsMenuItem;
       'elements.podcast-episode': ElementsPodcastEpisode;
+      'elements.social-link': ElementsSocialLink;
       'elements.social-links': ElementsSocialLinks;
       'elements.social-post': ElementsSocialPost;
       'elements.video': ElementsVideo;
+      'sections.footer-column': SectionsFooterColumn;
+      'sections.footer-contact': SectionsFooterContact;
+      'sections.footer-copyright': SectionsFooterCopyright;
+      'sections.footer-social': SectionsFooterSocial;
       'sections.gemstones': SectionsGemstones;
       'sections.hero': SectionsHero;
       'sections.latest-class': SectionsLatestClass;

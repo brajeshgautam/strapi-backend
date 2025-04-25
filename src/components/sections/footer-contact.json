@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_sections_footer_contacts",
+  "info": {
+    "displayName": "Footer Contact",
+    "description": "Contact information in footer"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "default": "CONTACT US"
+    },
+    "address": {
+      "type": "string",
+      "required": true,
+      "default": "Vikaspuri, Delhi - 110018"
+    },
+    "phone": {
+      "type": "string",
+      "required": true
+    },
+    "phoneHours": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    }
+  }
+} 

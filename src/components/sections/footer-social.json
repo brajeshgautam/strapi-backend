@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_sections_footer_socials",
+  "info": {
+    "displayName": "Footer Social",
+    "description": "Social media section in footer"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "default": "FOLLOW US ON"
+    },
+    "socialLinks": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.social-link",
+      "required": true,
+      "min": 1
+    }
+  }
+} 

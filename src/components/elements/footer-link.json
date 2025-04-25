@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_elements_footer_links",
+  "info": {
+    "displayName": "Footer Link",
+    "description": "Individual footer link item"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "url": {
+      "type": "string",
+      "required": true
+    },
+    "isExternal": {
+      "type": "boolean",
+      "default": false
+    },
+    "order": {
+      "type": "integer",
+      "required": true,
+      "min": 1
+    }
+  }
+} 

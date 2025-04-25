@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_sections_footer_columns",
+  "info": {
+    "displayName": "Footer Column",
+    "description": "A column of links in the footer"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "links": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.footer-link",
+      "required": true,
+      "min": 1
+    }
+  }
+} 

@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_sections_footer_copyrights",
+  "info": {
+    "displayName": "Footer Copyright",
+    "description": "Copyright and credits section"
+  },
+  "options": {},
+  "attributes": {
+    "copyrightText": {
+      "type": "string",
+      "required": true,
+      "default": "Copyright © 2023-2025 Brajesh Gautam. All Rights Reserved"
+    },
+    "developerCredit": {
+      "type": "string",
+      "required": true,
+      "default": "Designed & Developed By SLN Softwares"
+    },
+    "developerUrl": {
+      "type": "string"
+    }
+  }
+} 
