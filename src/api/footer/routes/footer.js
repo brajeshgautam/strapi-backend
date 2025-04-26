@@ -1,15 +1,11 @@
 'use strict';
 
-/**
- * homepage router
- */
-
 module.exports = {
   routes: [
     {
       method: 'GET',
-      path: '/homepage',
-      handler: 'homepage.find',
+      path: '/footer',
+      handler: 'footer.find',
       config: {
         policies: [],
         auth: false,
@@ -17,19 +13,19 @@ module.exports = {
     },
     {
       method: 'PUT',
-      path: '/homepage',
-      handler: 'homepage.update',
+      path: '/footer',
+      handler: 'footer.update',
       config: {
         policies: [],
       },
     },
     {
       method: 'POST',
-      path: '/homepage',
-      handler: 'homepage.create',
+      path: '/footer',
+      handler: 'footer.create',
       config: {
         policies: [],
       },
     },
   ],
-};
+}; 

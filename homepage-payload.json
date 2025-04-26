@@ -1,0 +1,124 @@
+{
+  "data": {
+    "hero": {
+      "title": "Welcome to Brajesh Gautam",
+      "description": "Your trusted source for wisdom, classes, and gemstones.",
+      "image": 4,
+      "videoUrl": "https://dummy.com/hero-video"
+    },
+    "show": {
+      "title": "Introduction",
+      "description": "Shri Brajesh Gautam is an educator and spiritual guide. His mission is to spread knowledge and positivity.",
+      "image": 4,
+      "buttonText": "Read More",
+      "buttonLink": "https://dummy.com/about"
+    },
+    "latestClass": {
+      "title": "Latest Class",
+      "description": "Why do we get sick? How to stay healthy?",
+      "thumbnail": 4,
+      "videoUrl": "https://dummy.com/latest-class-video",
+      "date": "2025-04-26T10:00:00.000Z"
+    },
+    "gemstones": {
+      "title": "Gemstones",
+      "stones": [
+        {
+          "name": "Yellow Cat's Eye",
+          "image": 4,
+          "description": "Specialty: Brings luck and prosperity.",
+          "link": "https://dummy.com/gemstones/yellow-cats-eye"
+        },
+        {
+          "name": "Coral",
+          "image": 4,
+          "description": "Specialty: Boosts energy and confidence.",
+          "link": "https://dummy.com/gemstones/coral"
+        },
+        {
+          "name": "Yellow topaz and pearl",
+          "image": 4,
+          "description": "Specialty: Enhances wisdom.",
+          "link": "https://dummy.com/gemstones/yellow-topaz-pearl"
+        },
+        {
+          "name": "Heart Chakra Peridot",
+          "image": 4,
+          "description": "Specialty: Opens the heart chakra.",
+          "link": "https://dummy.com/gemstones/heart-chakra-peridot"
+        },
+        {
+          "name": "Congo Agate (Hakeek)",
+          "image": 4,
+          "description": "Specialty: Provides protection.",
+          "link": "https://dummy.com/gemstones/congo-agate"
+        },
+        {
+          "name": "Rainbow Jasper and opal",
+          "image": 4,
+          "description": "Specialty: Balances emotions.",
+          "link": "https://dummy.com/gemstones/rainbow-jasper-opal"
+        }
+      ]
+    },
+    "quote": {
+      "quote": "The world is full of magic things, patiently waiting for our senses to grow sharper.",
+      "author": "Brajesh Gautam",
+      "authorImage": 3
+    },
+    "youtubeChannel": {
+      "title": "Youtube Video Channel",
+      "channelUrl": "https://youtube.com/dummy-channel",
+      "videos": [
+        {
+          "title": "Class on Astrology",
+          "thumbnail": 4,
+          "videoUrl": "https://youtube.com/watch?v=video1",
+          "duration": "10:00",
+          "views": "1.2K"
+        },
+        {
+          "title": "Gemstone Knowledge",
+          "thumbnail": 4,
+          "videoUrl": "https://youtube.com/watch?v=video2",
+          "duration": "8:30",
+          "views": "900"
+        }
+      ]
+    },
+    "socialMediaFeed": {
+      "title": "Social Media Feed",
+      "posts": [
+        {
+          "platform": "facebook",
+          "content": "Join our Facebook community!",
+          "image": 4,
+          "postUrl": "https://facebook.com/post/1",
+          "date": "2025-04-25T12:00:00.000Z"
+        },
+        {
+          "platform": "instagram",
+          "content": "Follow us on Instagram for updates.",
+          "image": 4,
+          "postUrl": "https://instagram.com/post/2",
+          "date": "2025-04-25T13:00:00.000Z"
+        }
+      ]
+    },
+    "wisdomPodcast": {
+      "title": "Wisdom Podcast",
+      "description": "Listen to inspiring podcasts by Brajesh Gautam.",
+      "image": 4,
+      "podcastUrl": "https://dummy.com/podcast",
+      "episodes": [
+        {
+          "title": "Episode 1: The Power of Positivity",
+          "description": "How to stay positive in tough times.",
+          "duration": "20:00",
+          "episodeUrl": "https://dummy.com/podcast/ep1",
+          "date": "2025-04-20T10:00:00.000Z"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "data": {
+    "usefulLinks": {
+      "title": "USEFUL LINKS",
+      "links": [
+        {"label": "Home", "url": "https://dummy.com/home", "isExternal": true, "order": 1},
+        {"label": "Gemstones", "url": "https://dummy.com/gemstones", "isExternal": true, "order": 2},
+        {"label": "Video Gallery", "url": "https://dummy.com/video-gallery", "isExternal": true, "order": 3},
+        {"label": "Contact Us", "url": "https://dummy.com/contact", "isExternal": true, "order": 4}
+      ]
+    },
+    "otherLinks": {
+      "title": "OTHER LINKS",
+      "links": [
+        {"label": "About us", "url": "https://dummy.com/about", "isExternal": true, "order": 1},
+        {"label": "Photo Gallery", "url": "https://dummy.com/photo-gallery", "isExternal": true, "order": 2},
+        {"label": "Donate Us", "url": "https://dummy.com/donate", "isExternal": true, "order": 3},
+        {"label": "Astro Gyaan", "url": "https://dummy.com/astro-gyaan", "isExternal": true, "order": 4},
+        {"label": "UNIVERSAL REMEDIES", "url": "https://dummy.com/universal-remedies", "isExternal": true, "order": 5},
+        {"label": "VARIOUS RULES OF LIFE", "url": "https://dummy.com/various-rules-of-life", "isExternal": true, "order": 6},
+        {"label": "GENERAL KNOWLEDGE", "url": "https://dummy.com/general-knowledge", "isExternal": true, "order": 7},
+        {"label": "RULES OF LIFE", "url": "https://dummy.com/rules-of-life", "isExternal": true, "order": 8},
+        {"label": "RULES OF STUDY", "url": "https://dummy.com/rules-of-study", "isExternal": true, "order": 9},
+        {"label": "SADHARAN UPAE", "url": "https://dummy.com/sadharan-upae", "isExternal": true, "order": 10},
+        {"label": "SAMANYA GYAN", "url": "https://dummy.com/samanya-gyan", "isExternal": true, "order": 11},
+        {"label": "KRISHNA", "url": "https://dummy.com/krishna", "isExternal": true, "order": 12},
+        {"label": "TRUTH OF LIFE", "url": "https://dummy.com/truth-of-life", "isExternal": true, "order": 13},
+        {"label": "मौन सुविचार", "url": "https://dummy.com/maun-suvichar", "isExternal": true, "order": 14},
+        {"label": "और क्या है ?", "url": "https://dummy.com/aur-kya-hai", "isExternal": true, "order": 15},
+        {"label": "जीवन जीने की कला", "url": "https://dummy.com/jeevan-jeene-ki-kala", "isExternal": true, "order": 16},
+        {"label": "GENERAL KNOWLEDGE ABOUT GOD AND", "url": "https://dummy.com/general-knowledge-god", "isExternal": true, "order": 17},
+        {"label": "ईश्वर, ईश्वर तथा ईश्वरीय ज्ञान", "url": "https://dummy.com/ishwar-gyan", "isExternal": true, "order": 18},
+        {"label": "कर्म तथा भाग्य का फल", "url": "https://dummy.com/karma-bhagya-phal", "isExternal": true, "order": 19},
+        {"label": "ग्रह, राशि, प्रभाव", "url": "https://dummy.com/grah-rashi-prabhav", "isExternal": true, "order": 20},
+        {"label": "Do's and Don'ts", "url": "https://dummy.com/dos-donts", "isExternal": true, "order": 21},
+        {"label": "UPAE", "url": "https://dummy.com/upae", "isExternal": true, "order": 22},
+        {"label": "लग्न 1 के उपाय", "url": "https://dummy.com/lagn-1", "isExternal": true, "order": 23},
+        {"label": "लग्न 2 के उपाय", "url": "https://dummy.com/lagn-2", "isExternal": true, "order": 24},
+        {"label": "लग्न 3 के उपाय", "url": "https://dummy.com/lagn-3", "isExternal": true, "order": 25},
+        {"label": "लग्न 4 के उपाय", "url": "https://dummy.com/lagn-4", "isExternal": true, "order": 26},
+        {"label": "लग्न 5 के उपाय", "url": "https://dummy.com/lagn-5", "isExternal": true, "order": 27},
+        {"label": "लग्न 6 के उपाय", "url": "https://dummy.com/lagn-6", "isExternal": true, "order": 28},
+        {"label": "लग्न 7 के उपाय", "url": "https://dummy.com/lagn-7", "isExternal": true, "order": 29},
+        {"label": "लग्न 8 के उपाय", "url": "https://dummy.com/lagn-8", "isExternal": true, "order": 30},
+        {"label": "लग्न 9 के उपाय", "url": "https://dummy.com/lagn-9", "isExternal": true, "order": 31},
+        {"label": "लग्न 10 के उपाय", "url": "https://dummy.com/lagn-10", "isExternal": true, "order": 32},
+        {"label": "लग्न 11 के उपाय", "url": "https://dummy.com/lagn-11", "isExternal": true, "order": 33},
+        {"label": "लग्न 12 के उपाय", "url": "https://dummy.com/lagn-12", "isExternal": true, "order": 34},
+        {"label": "Cow donation at Gaushala", "url": "https://dummy.com/cow-donation", "isExternal": true, "order": 35},
+        {"label": "Food for needi", "url": "https://dummy.com/food-for-needi", "isExternal": true, "order": 36}
+      ]
+    },
+    "contactUs": {
+      "title": "CONTACT US",
+      "address": "Vikaspuri, Delhi - 110018",
+      "phone": "+91 97171 94880",
+      "phoneHours": "12:00 PM - 05:00 PM",
+      "email": "info@brajeshgautam.com"
+    },
+    "followUs": {
+      "title": "FOLLOW US ON",
+      "socialLinks": [
+        {"platform": "facebook", "url": "https://facebook.com/dummy"},
+        {"platform": "instagram", "url": "https://instagram.com/dummy"},
+        {"platform": "youtube", "url": "https://youtube.com/dummy"}
+      ]
+    },
+    "copyright": {
+      "copyrightText": "Copyright © 2023-2025 Brajesh Gautam. All Rights Reserved",
+      "developerCredit": "Designed & Developed By SLN Softwares",
+      "developerUrl": "https://dummy.com"
+    }
+  }
+} 
