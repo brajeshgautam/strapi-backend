@@ -1,0 +1,13 @@
+<div *ngIf="about">
+  <h1>{{ about.title }}</h1>
+  <div *ngIf="about.image">
+    <img [src]="about.image.url" [alt]="about.image.alternativeText || about.title" style="max-width: 100%; height: auto;" />
+    <div *ngIf="about.image.formats">
+      <div *ngFor="let format of formatKeys(about.image.formats)">
+        <p>{{ format | titlecase }}:</p>
+        <img [src]="about.image.formats[format].url" [alt]="about.image.alternativeText || about.title" style="max-width: 200px; height: auto; margin-bottom: 10px;" />
+      </div>
+    </div>
+  </div>
+  <div [innerHTML]="about.content"></div>
+</div> 

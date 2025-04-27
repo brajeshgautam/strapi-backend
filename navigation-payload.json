@@ -1,0 +1,43 @@
+{
+  "data": {
+    "logo": 1,
+    "contactInfo": {
+      "phone": "+91 97194880",
+      "phoneHours": "12:00 - 5:00",
+      "email": "info@brajeshgautam.com"
+    },
+    "socialLinks": {
+      "facebook": "https://facebook.com/yourpage",
+      "instagram": "https://instagram.com/yourpage",
+      "youtube": "https://youtube.com/yourpage"
+    },
+    "menuItems": [
+      { "label": "Home", "url": "/", "order": 1, "isExternal": false },
+      { "label": "About", "url": "/about", "order": 2, "isExternal": false },
+      { "label": "Gemstones", "url": "/gemstones", "order": 3, "isExternal": false },
+      {
+        "label": "Media",
+        "url": "#",
+        "order": 4,
+        "isExternal": false,
+        "hasDropdown": true,
+        "dropdownItems": [
+          { "label": "Video Gallery", "url": "/media/videos", "order": 1, "isExternal": false },
+          { "label": "Photo Gallery", "url": "/media/photos", "order": 2, "isExternal": false }
+        ]
+      },
+      { "label": "Donate Us", "url": "/donate", "order": 5, "isExternal": false },
+      {
+        "label": "Contact Us",
+        "url": "/contact",
+        "order": 6,
+        "isExternal": false,
+        "highlight": true
+      }
+    ],
+    "languages": [
+      { "label": "English", "code": "en" },
+      { "label": "Hindi", "code": "hi" }
+    ]
+  }
+}

@@ -4,8 +4,8 @@ module.exports = {
   routes: [
     {
       method: 'GET',
-      path: '/about',
-      handler: 'about.find',
+      path: '/navigation',
+      handler: 'navigation.find',
       config: {
         policies: [],
         auth: false,
@@ -13,19 +13,21 @@ module.exports = {
     },
     {
       method: 'PUT',
-      path: '/about',
-      handler: 'about.update',
+      path: '/navigation',
+      handler: 'navigation.update',
       config: {
         policies: [],
+        auth: false,
       },
     },
     {
       method: 'POST',
-      path: '/about',
-      handler: 'about.create',
+      path: '/navigation',
+      handler: 'navigation.create',
       config: {
         policies: [],
+        auth: false,
       },
     },
   ],
-};
+}; 

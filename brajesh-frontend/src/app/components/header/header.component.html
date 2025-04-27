@@ -1,0 +1,63 @@
+<header *ngIf="navigationData as nav" class="header">
+  <!-- Top Bar -->
+  <div class="header-top">
+    <div class="header-logo">
+      <img *ngIf="nav.logo?.url" [src]="nav.logo.url" alt="Logo" />
+      <span class="brand">Brajesh Gautam</span>
+    </div>
+    <div class="header-info">
+      <span class="header-phone">
+        <i class="fas fa-phone"></i> {{ nav.contactInfo?.phone }}
+        <span class="header-hours"><em>{{ nav.contactInfo?.phoneHours }}</em></span>
+      </span>
+      <span class="header-email">
+        <i class="fas fa-envelope"></i> {{ nav.contactInfo?.email }}
+      </span>
+      <span class="header-socials">
+        <a *ngIf="nav.socialLinks?.facebook" [href]="nav.socialLinks.facebook" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+        <a *ngIf="nav.socialLinks?.instagram" [href]="nav.socialLinks.instagram" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a *ngIf="nav.socialLinks?.youtube" [href]="nav.socialLinks.youtube" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+      </span>
+      <span class="header-language">
+        <button class="lang-btn">SELECT LANGUAGE</button>
+        <select>
+          <option *ngFor="let lang of nav.languages" [value]="lang.code">{{ lang.code | uppercase }}</option>
+        </select>
+      </span>
+    </div>
+  </div>
+  <!-- Main Navigation Bar -->
+  <nav class="header-nav">
+    <ul>
+      <li *ngFor="let item of nav.menuItems; let i = index">
+        <ng-container *ngIf="!item.hasDropdown">
+          <a *ngIf="!item.isExternal && item.url === '/'" [routerLink]="item.url" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            {{ item.label }}
+            <span *ngIf="item.highlight" class="badge-new">New</span>
+          </a>
+          <a *ngIf="!item.isExternal && item.url !== '/'" [routerLink]="item.url" routerLinkActive="active">
+            {{ item.label }}
+            <span *ngIf="item.highlight" class="badge-new">New</span>
+          </a>
+          <a *ngIf="item.isExternal" [href]="item.url" target="_blank">
+            {{ item.label }}
+            <span *ngIf="item.highlight" class="badge-new">New</span>
+          </a>
+        </ng-container>
+        <ng-container *ngIf="item.hasDropdown">
+          <div class="dropdown" (mouseleave)="closeDropdown()">
+            <span class="dropdown-label" (click)="toggleDropdown(i)">
+              {{ item.label }} <i class="fas fa-chevron-down"></i>
+            </span>
+            <ul class="dropdown-menu" [style.display]="openDropdownIndex === i ? 'block' : 'none'">
+              <li *ngFor="let drop of item.dropdownItems">
+                <a *ngIf="!drop.isExternal" [routerLink]="drop.url">{{ drop.label }}</a>
+                <a *ngIf="drop.isExternal" [href]="drop.url" target="_blank">{{ drop.label }}</a>
+              </li>
+            </ul>
+          </div>
+        </ng-container>
+      </li>
+    </ul>
+  </nav>
+</header>
