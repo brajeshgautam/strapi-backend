@@ -1,20 +1,41 @@
 <!-- Hero Section -->
-<section class="hero" *ngIf="homepageData?.hero">
-  <video *ngIf="homepageData.hero.videoUrl" controls poster="https://placehold.co/900x300?text=Hero+Banner">
-    <source [src]="homepageData.hero.videoUrl" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-  <h1>{{ homepageData.hero.title }}</h1>
-  <p>{{ homepageData.hero.description }}</p>
+<section class="hero-figma" *ngIf="homepageData?.hero">
+  <div class="hero-figma-content">
+    <div class="hero-video-container">
+      <video
+        #heroVideo
+        *ngIf="safeVideoUrl"
+        autoplay
+        muted
+        loop
+        playsinline
+        poster="https://placehold.co/900x300?text=Brajesh+Gautam"
+      >
+        <source [src]="safeVideoUrl">
+        Your browser does not support the video tag.
+      </video>
+      <div class="hero-video-overlay">
+        <h1>{{ homepageData.hero.title }}</h1>
+        <div class="hero-figma-subtitle">{{ homepageData.hero.description }}</div>
+      </div>
+    </div>
+    <div *ngIf="!safeVideoUrl" class="no-video-message">
+      No video available
+    </div>
+  </div>
 </section>
 
 <!-- Introduction Section -->
-<section class="introduction" *ngIf="homepageData?.show">
+<section class="introduction intro-card" *ngIf="homepageData?.show">
   <img src="https://placehold.co/220x220?text=Brajesh" alt="Brajesh Gautam" />
   <div class="intro-card">
     <h2>{{ homepageData.show.title }}</h2>
     <p>{{ homepageData.show.description }}</p>
-    <a *ngIf="homepageData.show.buttonLink" [href]="homepageData.show.buttonLink" class="btn">
+    <a
+      *ngIf="homepageData.show.buttonLink"
+      [href]="homepageData.show.buttonLink"
+      class="btn"
+    >
       {{ homepageData.show.buttonText }}
     </a>
   </div>
@@ -25,7 +46,10 @@
   <img src="https://placehold.co/220x220?text=SNOW" alt="SNOW" />
   <div class="snow-card">
     <h2>SNOW</h2>
-    <p>Special Needs of Women: A focused initiative to empower and educate young women for a brighter future.</p>
+    <p>
+      Special Needs of Women: A focused initiative to empower and educate young
+      women for a brighter future.
+    </p>
     <a href="#" class="btn">Learn More</a>
   </div>
 </section>
@@ -34,12 +58,16 @@
 <section class="latest-class" *ngIf="homepageData?.latestClass">
   <h2>{{ homepageData.latestClass.title }}</h2>
   <p>{{ homepageData.latestClass.description }}</p>
-  <video *ngIf="homepageData.latestClass.videoUrl" controls poster="https://placehold.co/400x220?text=Latest+Class">
-    <source [src]="homepageData.latestClass.videoUrl" type="video/mp4">
+  <video
+    *ngIf="homepageData.latestClass.videoUrl"
+    controls
+    poster="https://placehold.co/400x220?text=Latest+Class"
+  >
+    <source [src]="homepageData.latestClass.videoUrl" type="video/mp4" />
     Your browser does not support the video tag.
   </video>
   <div *ngIf="homepageData.latestClass.date">
-    <small>{{ homepageData.latestClass.date | date:'medium' }}</small>
+    <small>{{ homepageData.latestClass.date | date: "medium" }}</small>
   </div>
 </section>
 
@@ -47,8 +75,20 @@
 <section class="gemstones" *ngIf="homepageData?.gemstones">
   <h2>{{ homepageData.gemstones.title }}</h2>
   <div class="gemstone-list">
-    <div class="gemstone-card" *ngFor="let stone of homepageData.gemstones.stones">
-      <img src="https://placehold.co/100x100?text=Gem" alt="{{ stone.name }}" style="width:100px;height:100px;border-radius:8px;margin-bottom:0.5rem;" />
+    <div
+      class="gemstone-card"
+      *ngFor="let stone of homepageData.gemstones.stones"
+    >
+      <img
+        src="https://placehold.co/100x100?text=Gem"
+        alt="{{ stone.name }}"
+        style="
+          width: 100px;
+          height: 100px;
+          border-radius: 8px;
+          margin-bottom: 0.5rem;
+        "
+      />
       <h4>{{ stone.name }}</h4>
       <p>{{ stone.description }}</p>
       <a [href]="stone.link" target="_blank">Learn More</a>
@@ -68,12 +108,37 @@
 <!-- YouTube Channel Section -->
 <section class="youtube-channel" *ngIf="homepageData?.youtubeChannel">
   <h2>{{ homepageData.youtubeChannel.title }}</h2>
-  <div class="youtube-videos" style="display:flex;gap:1.5rem;overflow-x:auto;">
-    <div class="youtube-video" *ngFor="let video of homepageData.youtubeChannel.videos" style="min-width:220px;background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(168,0,108,0.08);padding:1rem;text-align:center;">
+  <div
+    class="youtube-videos"
+    style="display: flex; gap: 1.5rem; overflow-x: auto"
+  >
+    <div
+      class="youtube-video"
+      *ngFor="let video of homepageData.youtubeChannel.videos"
+      style="
+        min-width: 220px;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(168, 0, 108, 0.08);
+        padding: 1rem;
+        text-align: center;
+      "
+    >
       <a [href]="video.videoUrl" target="_blank">
-        <img src="https://placehold.co/200x120?text=YouTube" alt="{{ video.title }}" style="width:200px;height:120px;border-radius:8px;" />
-        <div class="video-title" style="font-weight:600;margin:0.5rem 0 0.2rem 0;">{{ video.title }}</div>
-        <div class="video-meta" style="font-size:0.95rem;color:#a8006c;">{{ video.duration }} | {{ video.views }} views</div>
+        <img
+          src="https://placehold.co/200x120?text=YouTube"
+          alt="{{ video.title }}"
+          style="width: 200px; height: 120px; border-radius: 8px"
+        />
+        <div
+          class="video-title"
+          style="font-weight: 600; margin: 0.5rem 0 0.2rem 0"
+        >
+          {{ video.title }}
+        </div>
+        <div class="video-meta" style="font-size: 0.95rem; color: #a8006c">
+          {{ video.duration }} | {{ video.views }} views
+        </div>
       </a>
     </div>
   </div>
@@ -82,12 +147,30 @@
 <!-- Social Media Feed Section -->
 <section class="social-media-feed" *ngIf="homepageData?.socialMediaFeed">
   <h2>{{ homepageData.socialMediaFeed.title }}</h2>
-  <div class="social-posts" style="display:flex;gap:1.5rem;overflow-x:auto;">
-    <div class="social-post" *ngFor="let post of homepageData.socialMediaFeed.posts" style="min-width:220px;background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(168,0,108,0.08);padding:1rem;text-align:center;">
-      <div class="platform" style="font-weight:600;color:#a8006c;">{{ post.platform | titlecase }}</div>
-      <div class="content" style="margin:0.5rem 0;">{{ post.content }}</div>
+  <div
+    class="social-posts"
+    style="display: flex; gap: 1.5rem; overflow-x: auto"
+  >
+    <div
+      class="social-post"
+      *ngFor="let post of homepageData.socialMediaFeed.posts"
+      style="
+        min-width: 220px;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(168, 0, 108, 0.08);
+        padding: 1rem;
+        text-align: center;
+      "
+    >
+      <div class="platform" style="font-weight: 600; color: #a8006c">
+        {{ post.platform | titlecase }}
+      </div>
+      <div class="content" style="margin: 0.5rem 0">{{ post.content }}</div>
       <a [href]="post.postUrl" target="_blank">View Post</a>
-      <div class="date" style="font-size:0.9rem;color:#888;">{{ post.date | date:'medium' }}</div>
+      <div class="date" style="font-size: 0.9rem; color: #888">
+        {{ post.date | date: "medium" }}
+      </div>
     </div>
   </div>
 </section>
@@ -95,18 +178,52 @@
 <!-- Wisdom Podcast Section -->
 <section class="wisdom-podcast" *ngIf="homepageData?.wisdomPodcast">
   <h2>{{ homepageData.wisdomPodcast.title }}</h2>
-  <div style="display:flex;align-items:center;gap:2rem;justify-content:center;">
-    <img src="https://placehold.co/220x320?text=Podcast" alt="Wisdom Podcast" style="width:220px;height:320px;object-fit:cover;border-radius:18px;box-shadow:0 2px 8px rgba(168,0,108,0.08);" />
+  <div
+    style="
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      justify-content: center;
+    "
+  >
+    <img
+      src="https://placehold.co/220x320?text=Podcast"
+      alt="Wisdom Podcast"
+      style="
+        width: 220px;
+        height: 320px;
+        object-fit: cover;
+        border-radius: 18px;
+        box-shadow: 0 2px 8px rgba(168, 0, 108, 0.08);
+      "
+    />
     <div>
       <p>{{ homepageData.wisdomPodcast.description }}</p>
-      <a [href]="homepageData.wisdomPodcast.podcastUrl" target="_blank" class="btn">Listen to Podcast</a>
+      <a
+        [href]="homepageData.wisdomPodcast.podcastUrl"
+        target="_blank"
+        class="btn"
+        >Listen to Podcast</a
+      >
       <div class="podcast-episodes">
-        <div class="podcast-episode" *ngFor="let episode of homepageData.wisdomPodcast.episodes" style="margin-top:1.5rem;background:#fff;padding:1rem 1.5rem;border-radius:12px;box-shadow:0 2px 8px rgba(168,0,108,0.08);">
+        <div
+          class="podcast-episode"
+          *ngFor="let episode of homepageData.wisdomPodcast.episodes"
+          style="
+            margin-top: 1.5rem;
+            background: #fff;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(168, 0, 108, 0.08);
+          "
+        >
           <h4>{{ episode.title }}</h4>
           <p>{{ episode.description }}</p>
           <div>{{ episode.duration }}</div>
           <a [href]="episode.episodeUrl" target="_blank">Listen</a>
-          <div class="date" style="font-size:0.9rem;color:#888;">{{ episode.date | date:'medium' }}</div>
+          <div class="date" style="font-size: 0.9rem; color: #888">
+            {{ episode.date | date: "medium" }}
+          </div>
         </div>
       </div>
     </div>

@@ -1,18 +1,9 @@
 /* General Styles */
 section {
-  margin: 2rem auto;
+  margin: 0 auto;
   padding: 2rem 1rem;
-  max-width: 1100px;
   background: #fff;
-  border-radius: 18px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-}
-
-.hero {
-  background: #fbe9f6;
-  text-align: center;
-  padding-top: 0;
-  border-radius: 0 0 18px 18px;
+  /* box-shadow: 0 2px 12px rgba(0,0,0,0.04); */
 }
 .hero h1 {
   font-size: 2.5rem;
@@ -25,7 +16,6 @@ section {
 }
 .hero video, .hero img {
   width: 100%;
-  max-width: 700px;
   border-radius: 12px;
   margin: 0 auto;
   display: block;
@@ -33,12 +23,12 @@ section {
 
 .introduction, .snow {
   display: flex;
-  align-items: center;
+  justify-content: center;
   gap: 2rem;
   background: #fff;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-  border-radius: 18px;
-  margin-bottom: 2rem;
+  /* box-shadow: 0 2px 12px rgba(0,0,0,0.04); */
+  /* border-radius: 18px;
+  margin-bottom: 2rem; */
 }
 .introduction img, .snow img {
   width: 220px;
@@ -76,8 +66,8 @@ section {
 .latest-class {
   text-align: center;
   background: #fff;
-  border-radius: 18px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  /* border-radius: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04); */
 }
 .latest-class img, .latest-class video {
   width: 100%;
@@ -89,7 +79,7 @@ section {
 
 .gemstones {
   background: #fbe9f6;
-  border-radius: 18px;
+  /* border-radius: 18px; */
   text-align: center;
 }
 .gemstone-list {
@@ -146,4 +136,143 @@ section {
     min-width: unset;
     width: 100%;
   }
+}
+
+.hero-figma {
+  background: #fff;
+  padding: 0;
+  margin: 0 auto;
+  border-radius: 0;
+  box-shadow: none;
+  min-height: 420px;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  width: 100vw;
+  position: relative;
+}
+
+.hero-figma-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 100vw;
+  width: 100vw;
+  height: auto%;
+  gap: 2.5rem;
+}
+.hero-figma-text {
+  flex: 1 1 0;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-left: 2rem;
+}
+.hero-figma-text h1 {
+  font-size: 3.052rem;
+  font-family: var(--primary-font);
+  color: #927397;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.01em;
+}
+.hero-figma-subtitle {
+  font-size: 1.5rem;
+  color: #D6809C;
+  font-family: var(--secondary-font);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.01em;
+}
+.hero-figma-image {
+  width: 100%;
+  margin: 0 auto;
+}
+.hero-figma-image video {
+  width: 100%;
+  height: auto;
+}
+.hero-figma-image img {
+  max-width: 420px;
+  width: 100%;
+  height: auto;
+  border-radius: 0;
+  box-shadow: none;
+  object-fit: contain;
+}
+
+.no-video-message {
+  text-align: center;
+  padding: 2rem;
+  background: #f5f5f5;
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+
+@media (max-width: 900px) {
+  .hero-figma-content {
+    flex-direction: column;
+    gap: 2rem;
+    padding: 0 1rem;
+  }
+  .hero-figma-text {
+    padding-left: 0;
+    align-items: center;
+    text-align: center;
+  }
+  .hero-figma-image {
+    padding-right: 0;
+    justify-content: center;
+  }
+  .hero-figma-image img {
+    max-width: 90vw;
+  }
+}
+
+.hero-video-container {
+  position: relative;
+  width: 100vw;
+  max-width: 100vw;
+  margin: 0;
+  overflow: hidden;
+}
+
+.hero-video-container video {
+  width: 100vw;
+  max-width: 100vw;
+  height: calc(100vh - 250px);
+  object-fit: cover;
+  display: block;
+}
+
+.hero-video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 2rem;
+  color: #fff;
+  background: linear-gradient(180deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.35) 100%);
+  pointer-events: none;
+  text-align: center;
+}
+
+.hero-video-overlay h1 {
+  font-size: 4.5rem;
+  margin-bottom: 2rem;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+}
+
+.hero-video-overlay .hero-figma-subtitle {
+  font-size: 1.5rem;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.7);
 }

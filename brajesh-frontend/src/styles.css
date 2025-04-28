@@ -1,1 +1,131 @@
 /* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+:root {
+  --primary-font: 'Playfair Display', serif;
+  --secondary-font: 'Poppins', sans-serif;
+  --primary-color: #927397;
+  --secondary-color-1: #D6809C;
+  --secondary-color-2: #E7CBAE;
+  --background-color-1: #FAF5EF;
+  --background-color-2: #FFFFFF;
+  --text-color: #7F7F7F;
+  --h1-size: 3.052rem;
+  --h2-size: 2.4441rem;
+  --h3-size: 1.953rem;
+  --h4-size: 1.563rem;
+  --h5-size: 1.25rem;
+  --h6-size: 1rem;
+  --text-size: 0.8rem;
+  --label-size: 0.64rem;
+  --small-size: 0.512rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--secondary-font);
+  color: var(--text-color);
+  line-height: 1.6;
+  background-color: var(--background-color-1);
+  font-size: var(--text-size);
+}
+
+h1 {
+  font-family: var(--primary-font);
+  font-size: var(--h1-size);
+  font-weight: 600;
+  color: var(--primary-color);
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-family: var(--primary-font);
+  font-size: var(--h2-size);
+  font-weight: 600;
+  color: var(--primary-color);
+  line-height: 1.18;
+  margin-bottom: 1.25rem;
+}
+
+h3 {
+  font-family: var(--primary-font);
+  font-size: var(--h3-size);
+  font-weight: 600;
+  color: var(--primary-color);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+h4 {
+  font-family: var(--primary-font);
+  font-size: var(--h4-size);
+  font-weight: 600;
+  color: var(--primary-color);
+  line-height: 1.22;
+  margin-bottom: 0.75rem;
+}
+
+h5 {
+  font-family: var(--primary-font);
+  font-size: var(--h5-size);
+  font-weight: 600;
+  color: var(--primary-color);
+  line-height: 1.25;
+  margin-bottom: 0.5rem;
+}
+
+h6 {
+  font-family: var(--primary-font);
+  font-size: var(--h6-size);
+  font-weight: 600;
+  color: var(--primary-color);
+  line-height: 1.25;
+  margin-bottom: 0.5rem;
+}
+
+p, .text {
+  font-size: var(--text-size);
+  margin-bottom: 1rem;
+}
+
+.label {
+  font-size: var(--label-size);
+  font-weight: 500;
+}
+
+small, .small {
+  font-size: var(--small-size);
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-size: var(--text-size);
+}
+
+a:hover {
+  color: var(--secondary-color-1);
+}
+
+/* Material Overrides */
+.mat-mdc-button {
+  font-family: var(--secondary-font) !important;
+  font-size: var(--text-size) !important;
+}
+
+.mat-mdc-menu-item {
+  font-family: var(--secondary-font) !important;
+  font-size: var(--text-size) !important;
+}
+
+.mat-mdc-form-field {
+  font-family: var(--secondary-font) !important;
+  font-size: var(--text-size) !important;
+}

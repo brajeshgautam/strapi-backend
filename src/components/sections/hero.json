@@ -17,11 +17,24 @@
     "image": {
       "type": "media",
       "multiple": false,
-      "required": true,
-      "allowedTypes": ["images"]
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
     },
     "videoUrl": {
       "type": "string"
+    },
+    "video": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     }
   }
-} 
+}
