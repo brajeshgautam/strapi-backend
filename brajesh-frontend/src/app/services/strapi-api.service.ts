@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class StrapiApiService {
-  private apiUrl = 'http://localhost:1337/api'; // Update this if your Strapi runs elsewhere
+  private apiUrl = 'https://1337-idx-brajeshgautam-1746079867605.cluster-6dx7corvpngoivimwvvljgokdw.cloudworkstations.dev/api'; // Update this if your Strapi runs elsewhere
 
   constructor(private http: HttpClient) { }
 
