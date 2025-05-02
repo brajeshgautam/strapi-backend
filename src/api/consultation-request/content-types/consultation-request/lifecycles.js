@@ -56,40 +56,40 @@ module.exports = {
     }
 
     try {
-      // 1. Get Admin Settings (Email Templates)
-      const adminSettings = await strapi.entityService.findMany('api::admin-setting.admin-setting');
+      // 1. Get Admin Settings (Email Templates) - Use findOne for single types
+      const adminSettings = await strapi.query('api::admin-setting.admin-setting').findOne({});
+
+      // Check if admin settings exist and have the required fields
       if (!adminSettings || !adminSettings.tokenConfirmationEmailSubject || !adminSettings.tokenConfirmationEmailBody) {
-        console.error('Token confirmation email template not configured in Admin Settings.');
-        return; // Don't proceed if template is missing
+        console.error('Admin settings for token confirmation email are missing or incomplete.');
+        return; // Stop if email templates aren't configured
       }
 
-      // 2. Get Client Email (Use finalResult)
-      if (!finalResult.client || !finalResult.client.email) {
-        console.error(`Could not find client email for Consultation Request ID: ${finalResult.id}`);
-        return;
-      }
-      const clientEmail = finalResult.client.email;
-      const clientName = finalResult.fullName || finalResult.client.username; // Use fullName if available
+      // 2. Prepare Email Content
+      const subjectTemplate = adminSettings.tokenConfirmationEmailSubject;
+      const bodyTemplate = adminSettings.tokenConfirmationEmailBody; // This is likely HTML/Markdown from RichText
 
-      // 3. Prepare Email Content (Replace Placeholders)
-      let emailSubject = adminSettings.tokenConfirmationEmailSubject;
-      let emailBody = adminSettings.tokenConfirmationEmailBody;
+      // 3. Replace Placeholders
+      const subject = subjectTemplate.replace('{{tokenNumber}}', finalResult.tokenNumber);
 
-      // Basic placeholder replacement (you might want a more robust template engine later)
-      emailSubject = emailSubject.replace('{tokenNumber}', finalResult.tokenNumber);
-      emailBody = emailBody.replace('{clientName}', clientName);
-      emailBody = emailBody.replace('{tokenNumber}', finalResult.tokenNumber);
-      // Add more replacements as needed (e.g., {query}, {submissionDate})
+      let body = bodyTemplate
+        .replace(/{{tokenNumber}}/g, finalResult.tokenNumber)
+        .replace(/{{fullName}}/g, finalResult.fullName || 'Client') // Added fallback
+        .replace(/{{query}}/g, finalResult.query || 'N/A'); // Added fallback
+
+      // Basic Markdown to HTML conversion if needed (consider a library for complex cases)
+      // For simplicity, assuming the RichText editor outputs basic HTML or Markdown
+      // that Nodemailer can handle or that you might process further.
 
       // 4. Send Email
       await strapi.plugin('email').service('email').send({
-        to: clientEmail,
-        subject: emailSubject,
-        html: emailBody, // Assuming body is HTML from the Rich Text editor
+        to: finalResult.client.email,
+        subject: subject,
+        html: body, // Assuming body is HTML from the Rich Text editor
         // text: // Optional: Provide a plain text version
       });
 
-      console.log(`Token confirmation email sent successfully to ${clientEmail} for token ${finalResult.tokenNumber}`);
+      console.log(`Token confirmation email sent successfully to ${finalResult.client.email} for token ${finalResult.tokenNumber}`);
 
     } catch (err) {
       console.error('Error sending token confirmation email:', err);
