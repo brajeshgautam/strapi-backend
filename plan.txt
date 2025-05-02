@@ -1,0 +1,109 @@
+Phase 1: Project Setup & Core Data Models
+
+Backend (Strapi):
+Initialize Strapi project, configure database.
+Create ConsultationRequest content type via Content-Type Builder.
+Create AdminSetting Single Type via Content-Type Builder.
+Extend User Model:
+Create the file ./src/extensions/users-permissions/strapi-server.js.
+Inside this file, modify the schema to add the custom fields (fullName, dateOfBirth, etc.) to the plugin::users-permissions.user schema. (Refer to v5 docs on extending plugin schemas if needed, might involve modifying the content type directly if UI extension isn't the v5 way). Self-correction: In v5, you usually add fields directly via the Content-Type builder UI even for plugin models. -> Action: Use the Content-Type Builder UI to add the custom fields directly to the User (from Users & Permissions Plugin).
+Configure Roles & Permissions via Strapi Admin UI (Public: register, create consultation-request; Authenticated: find/findOne own consultation-request, me action, access custom endpoints).
+Configure & test Strapi Email Plugin.
+Populate AdminSetting via Admin UI.
+Frontend (Angular): (Unchanged) Initialize project, routing, HttpClient, services.
+Phase 2: Client - Consultation Request & Token Issuance
+
+Backend (Strapi):
+Implement validation for query word count using model validations in ./src/api/consultation-request/content-types/consultation-request/schema.json or custom middleware if needed.
+Implement Token Issuance Logic:
+In ./src/index.js (or a dedicated bootstrap file):
+Use strapi.db.lifecycles.subscribe to listen for afterUpdate on the api::consultation-request.consultation-request model.
+Inside the hook: Check if status changed to Submitted (or check if all required fields are now present).
+If conditions met:
+Use strapi.entityService to find the maximum existing tokenNumber.
+Generate newTokenNumber = max + 1.
+Use strapi.entityService.update to set tokenNumber, status: 'Token Issued', and issueDate on the current event.result.
+Use strapi.plugin('email').service('email').send to send the Confirmation Email (fetch template from AdminSetting using strapi.entityService).
+Frontend (Angular): (Unchanged) Create form, add validation, call POST /api/consultation-requests, handle response, implement basic auth.
+Phase 3: Admin - Token Viewing & Selection
+
+Backend (Strapi):
+Create Custom Controller: ./src/api/consultation-request/controllers/custom-consultation-controller.js. Define a batchSelect async function.
+Create Custom Route: ./src/api/consultation-request/routes/custom-consultation-routes.js. Define a route: { method: 'PUT', path: '/consultation-requests/batch-select', handler: 'custom-consultation-controller.batchSelect' }.
+Implement batchSelect Controller Action:
+Accept array of IDs from ctx.request.body.
+Use strapi.entityService.updateMany (or loop with update) to update requests: set status: 'Selected', selectedDate: new Date(). Add necessary filters (id_in: ids, status: 'Token Issued').
+Fetch client emails for updated requests.
+Loop through updated requests and send "Selected for Today" emails.
+Frontend (Angular): (Unchanged) Create admin dashboard, fetch Token Issued requests, allow selection, implement button to call the custom batch-select route.
+Phase 4: Admin - Serving Queue Management
+
+Backend (Strapi):
+Extend Custom Controller: Add serve, complete, skip async functions to ./src/api/consultation-request/controllers/custom-consultation-controller.js.
+Extend Custom Routes: Add routes in ./src/api/consultation-request/routes/custom-consultation-routes.js:
+{ method: 'PUT', path: '/consultation-requests/:id/serve', handler: 'custom-consultation-controller.serve' }
+{ method: 'PUT', path: '/consultation-requests/:id/complete', handler: 'custom-consultation-controller.complete' }
+{ method: 'PUT', path: '/consultation-requests/:id/skip', handler: 'custom-consultation-controller.skip' }
+Implement Controller Actions: Use strapi.entityService.update to change the status (In Progress, Completed, Skipped) and set dates (completionDate) based on the :id parameter. Send "Your Turn Now" email in the serve action.
+Frontend (Angular): (Unchanged) Create admin queue view, fetch Selected requests, display In Progress, implement buttons calling the custom serve, complete, skip routes.
+Phase 5: Client - Status Check & QR Code Logic
+
+Backend (Strapi):
+Extend Custom Controller: Add statusOverview async function to ./src/api/consultation-request/controllers/custom-consultation-controller.js.
+Extend Custom Routes: Add route: { method: 'GET', path: '/consultation-requests/status-overview', handler: 'custom-consultation-controller.statusOverview', config: { policies: ['global::isAuthenticated'] } } (Assuming a global isAuthenticated policy exists or needs creation).
+Implement statusOverview Controller Action:
+Get logged-in user ID: const userId = ctx.state.user.id;.
+Use strapi.entityService.findOne to get the user (plugin::users-permissions.user, userId) including statusCheckCount and lastStatusCheckReset.
+Implement Rate Limiting Logic: Check count/timestamp, return 429 if limit exceeded, otherwise update count/timestamp using strapi.entityService.update.
+Use strapi.entityService.findMany to find the user's active consultation-request (filter by client: userId, status not Completed/Skipped/Cancelled).
+Use strapi.entityService.findMany to find the In Progress request (limit 1) to get currentlyServingToken.
+Calculate queuePosition.
+Get clientToken, clientStatus, isQrEmailSent from the user's request.
+QR Email Logic: If conditions met (diff <= 10, etc.) AND isQrEmailSent is false:
+Fetch AdminSetting for QR URL and email template.
+Send email.
+Use strapi.entityService.update to set isQrEmailSent = true on the client's request.
+Return the required data object.
+Frontend (Angular): (Unchanged) Create status component, call custom /status-overview route, display info, handle rate limit errors, conditionally display QR image using the fetched URL.
+Phase 6: Enhancements & Polish
+
+Backend (Strapi):
+Extend Custom Controller/Routes: Add exportCsv action and route.
+Implement exportCsv Action: Fetch data using strapi.entityService, format using a CSV library (e.g., papaparse), set response headers for download.
+Frontend (Angular): (Unchanged) Add export button, implement logic to allow new request submission only after completion, UI/UX polish, error handling, testing.
+IV. Deployment & Considerations (Unchanged)
+
+Hosting, Security, Scalability, Maintenance.
+
+
+
+users (Clients) and the Administrator would be able to perform once the system is implemented:
+
+Client Actions:
+
+Register/Login: Create an account and log in to the system (likely via email/password initially).
+Submit Consultation Request: Fill out and submit the form with required information (Full Name, DOB, Place of Birth, Consultation Query).
+Receive Token Confirmation: Automatically receive an email notification confirming their token number once all required information is provided and the request status becomes Token Issued.
+Check Token Status: View their current consultation request's status (Token Issued, Selected, In Progress, etc.), see which token number is currently being served, and get an estimated queue position.
+Limited Status Checks: Perform the status check action up to 3 times per day.
+Receive "Selected" Notification: Automatically receive an email notification when the admin selects their token for service on a particular day.
+Receive/View QR Code:
+Automatically receive an email containing the QR code when their token is within 10 spots of the currently serving token.
+View the QR code directly within their status page on the frontend when their token is within 10 spots.
+Receive "Your Turn" Notification: Automatically receive an email notification when the admin marks their token as In Progress.
+Book New Consultation: Submit a new consultation request only after their previous request is marked as Completed, Skipped, or Cancelled.
+Admin Actions (via Dedicated Angular Admin UI or Strapi Admin Panel):
+
+Login: Access the administrative interface.
+Configure Settings (Strapi Admin): Set the static QR Code URL and manage the content of various email notification templates (AdminSetting Single Type).
+View Pending Tokens: See a list of all consultation requests with the status Token Issued, typically sorted by token number.
+View Client Details: See the associated client information (Full Name, DOB, POB, Query) for any selected token/request.
+Select Tokens for Service: Choose multiple Token Issued requests from the list and mark them as Selected for service on the current day (triggering notifications).
+View Daily Queue: See the list of requests marked as Selected for the current day, ordered by token number.
+Manage Serving Process:
+View which token (if any) is currently In Progress.
+Click "Serve Next" to move the next Selected token to the In Progress status (triggering "Your Turn" notification).
+Click "Complete" to mark the In Progress consultation as Completed.
+Click "Skip" to mark the In Progress consultation as Skipped.
+Export Data: Download a CSV file containing details of consultation requests.
+This separation clearly defines the distinct roles and capabilities within the planned token-based consultation system.

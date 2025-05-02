@@ -400,8 +400,8 @@ export interface ApiAboutAbout extends Struct.SingleTypeSchema {
 export interface ApiAdminSettingAdminSetting extends Struct.SingleTypeSchema {
   collectionName: 'admin_settings';
   info: {
-    description: '';
-    displayName: 'AdminSetting';
+    description: 'Global settings for the consultation system, including QR code and email templates';
+    displayName: 'Admin Setting';
     pluralName: 'admin-settings';
     singularName: 'admin-setting';
   };
@@ -566,13 +566,13 @@ export interface ApiConsultationRequestConsultationRequest
   extends Struct.CollectionTypeSchema {
   collectionName: 'consultation_requests';
   info: {
-    description: '';
-    displayName: 'ConsultationRequest';
+    description: 'Handles client consultation requests and their lifecycle';
+    displayName: 'Consultation Request';
     pluralName: 'consultation-requests';
     singularName: 'consultation-request';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     client: Schema.Attribute.Relation<
@@ -580,25 +580,27 @@ export interface ApiConsultationRequestConsultationRequest
       'plugin::users-permissions.user'
     > &
       Schema.Attribute.Required;
-    completionDate: Schema.Attribute.DateTime;
+    country: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    currentPlace: Schema.Attribute.String;
+    dateOfBirth: Schema.Attribute.Date & Schema.Attribute.Required;
+    fullName: Schema.Attribute.String & Schema.Attribute.Required;
     isQrEmailSent: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    issueDate: Schema.Attribute.DateTime;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::consultation-request.consultation-request'
     > &
       Schema.Attribute.Private;
+    phoneNumber: Schema.Attribute.String & Schema.Attribute.Required;
+    placeOfBirth: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     query: Schema.Attribute.RichText & Schema.Attribute.Required;
     selectedDate: Schema.Attribute.Date;
     status: Schema.Attribute.Enumeration<
       [
-        'Pending Information',
-        'Submitted',
         'Token Issued',
         'Selected',
         'In Progress',
@@ -608,8 +610,8 @@ export interface ApiConsultationRequestConsultationRequest
       ]
     > &
       Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<'Pending Information'>;
-    tokenNumber: Schema.Attribute.String & Schema.Attribute.Unique;
+      Schema.Attribute.DefaultTo<'Token Issued'>;
+    tokenNumber: Schema.Attribute.Integer & Schema.Attribute.Unique;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

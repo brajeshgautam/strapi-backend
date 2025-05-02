@@ -4,8 +4,8 @@
   "info": {
     "singularName": "admin-setting",
     "pluralName": "admin-settings",
-    "displayName": "AdminSetting",
-    "description": ""
+    "displayName": "Admin Setting",
+    "description": "Global settings for the consultation system, including QR code and email templates"
   },
   "options": {
     "draftAndPublish": false

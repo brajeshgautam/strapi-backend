@@ -4,14 +4,36 @@
   "info": {
     "singularName": "consultation-request",
     "pluralName": "consultation-requests",
-    "displayName": "ConsultationRequest",
-    "description": ""
+    "displayName": "Consultation Request",
+    "description": "Handles client consultation requests and their lifecycle"
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
+    "fullName": {
+      "type": "string",
+      "required": true
+    },
+    "dateOfBirth": {
+      "type": "date",
+      "required": true
+    },
+    "placeOfBirth": {
+      "type": "string",
+      "required": true
+    },
+    "currentPlace": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string"
+    },
+    "phoneNumber": {
+      "type": "string",
+      "required": true
+    },
     "query": {
       "type": "richtext",
       "required": true
@@ -19,8 +41,6 @@
     "status": {
       "type": "enumeration",
       "enum": [
-        "Pending Information",
-        "Submitted",
         "Token Issued",
         "Selected",
         "In Progress",
@@ -28,22 +48,15 @@
         "Skipped",
         "Cancelled"
       ],
-      "default": "Pending Information",
+      "default": "Token Issued",
       "required": true
     },
     "tokenNumber": {
-      "type": "string",
-      "unique": true,
-      "configurable": false
-    },
-    "issueDate": {
-      "type": "datetime"
+      "type": "integer",
+      "unique": true
     },
     "selectedDate": {
       "type": "date"
-    },
-    "completionDate": {
-      "type": "datetime"
     },
     "isQrEmailSent": {
       "type": "boolean",
@@ -53,7 +66,7 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
-      "inversedBy": "consultation_requests", 
+      "inversedBy": "consultation_requests",
       "required": true
     }
   }
