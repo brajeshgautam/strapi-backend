@@ -9,7 +9,8 @@
     "displayName": "User"
   },
   "options": {
-    "draftAndPublish": false
+    "draftAndPublish": false,
+    "timestamps": true
   },
   "attributes": {
     "username": {
@@ -74,6 +75,36 @@
       ],
       "type": "media",
       "multiple": true
+    },
+    "fullName": {
+      "type": "text",
+      "required": true,
+      "configurable": false
+    },
+    "dateOfBirth": {
+      "type": "date",
+      "required": true,
+      "configurable": false
+    },
+    "placeOfBirth": {
+      "type": "text",
+      "required": true,
+      "configurable": false
+    },
+    "statusCheckCount": {
+      "type": "integer",
+      "default": 0,
+      "private": true
+    },
+    "lastStatusCheckReset": {
+      "type": "datetime",
+      "private": true
+    },
+    "consultation_requests": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::consultation-request.consultation-request",
+      "mappedBy": "client"
     }
   }
 }

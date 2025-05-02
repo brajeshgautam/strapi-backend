@@ -397,6 +397,43 @@ export interface ApiAboutAbout extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiAdminSettingAdminSetting extends Struct.SingleTypeSchema {
+  collectionName: 'admin_settings';
+  info: {
+    description: '';
+    displayName: 'AdminSetting';
+    pluralName: 'admin-settings';
+    singularName: 'admin-setting';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::admin-setting.admin-setting'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    qrCodeEmailBody: Schema.Attribute.RichText;
+    qrCodeEmailSubject: Schema.Attribute.Text;
+    qrCodeImageUrl: Schema.Attribute.Text & Schema.Attribute.Required;
+    selectedForTodayEmailBody: Schema.Attribute.RichText;
+    selectedForTodayEmailSubject: Schema.Attribute.Text;
+    tokenConfirmationEmailBody: Schema.Attribute.RichText;
+    tokenConfirmationEmailSubject: Schema.Attribute.Text;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    yourTurnNowEmailBody: Schema.Attribute.RichText;
+    yourTurnNowEmailSubject: Schema.Attribute.Text;
+  };
+}
+
 export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
   collectionName: 'articles';
   info: {
@@ -519,6 +556,60 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
     name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     slug: Schema.Attribute.UID;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiConsultationRequestConsultationRequest
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'consultation_requests';
+  info: {
+    description: '';
+    displayName: 'ConsultationRequest';
+    pluralName: 'consultation-requests';
+    singularName: 'consultation-request';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    client: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    > &
+      Schema.Attribute.Required;
+    completionDate: Schema.Attribute.DateTime;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    isQrEmailSent: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    issueDate: Schema.Attribute.DateTime;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::consultation-request.consultation-request'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    query: Schema.Attribute.RichText & Schema.Attribute.Required;
+    selectedDate: Schema.Attribute.Date;
+    status: Schema.Attribute.Enumeration<
+      [
+        'Pending Information',
+        'Submitted',
+        'Token Issued',
+        'Selected',
+        'In Progress',
+        'Completed',
+        'Skipped',
+        'Cancelled',
+      ]
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Pending Information'>;
+    tokenNumber: Schema.Attribute.String & Schema.Attribute.Unique;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1167,19 +1258,27 @@ export interface PluginUsersPermissionsUser
   };
   options: {
     draftAndPublish: false;
+    timestamps: true;
   };
   attributes: {
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     confirmationToken: Schema.Attribute.String & Schema.Attribute.Private;
     confirmed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    consultation_requests: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::consultation-request.consultation-request'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    dateOfBirth: Schema.Attribute.Date & Schema.Attribute.Required;
     email: Schema.Attribute.Email &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
+    fullName: Schema.Attribute.Text & Schema.Attribute.Required;
+    lastStatusCheckReset: Schema.Attribute.DateTime & Schema.Attribute.Private;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -1195,6 +1294,7 @@ export interface PluginUsersPermissionsUser
       'images' | 'files' | 'videos' | 'audios',
       true
     >;
+    placeOfBirth: Schema.Attribute.Text & Schema.Attribute.Required;
     provider: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     resetPasswordToken: Schema.Attribute.String & Schema.Attribute.Private;
@@ -1202,6 +1302,9 @@ export interface PluginUsersPermissionsUser
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    statusCheckCount: Schema.Attribute.Integer &
+      Schema.Attribute.Private &
+      Schema.Attribute.DefaultTo<0>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1225,9 +1328,11 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::about.about': ApiAboutAbout;
+      'api::admin-setting.admin-setting': ApiAdminSettingAdminSetting;
       'api::article.article': ApiArticleArticle;
       'api::author.author': ApiAuthorAuthor;
       'api::category.category': ApiCategoryCategory;
+      'api::consultation-request.consultation-request': ApiConsultationRequestConsultationRequest;
       'api::footer.footer': ApiFooterFooter;
       'api::global.global': ApiGlobalGlobal;
       'api::homepage.homepage': ApiHomepageHomepage;

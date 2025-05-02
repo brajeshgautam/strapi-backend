@@ -1,0 +1,44 @@
+{
+  "kind": "singleType",
+  "collectionName": "admin_settings",
+  "info": {
+    "singularName": "admin-setting",
+    "pluralName": "admin-settings",
+    "displayName": "AdminSetting",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "qrCodeImageUrl": {
+      "type": "text",
+      "required": true
+    },
+    "selectedForTodayEmailSubject": {
+      "type": "text"
+    },
+    "selectedForTodayEmailBody": {
+      "type": "richtext"
+    },
+    "yourTurnNowEmailSubject": {
+      "type": "text"
+    },
+    "yourTurnNowEmailBody": {
+      "type": "richtext"
+    },
+    "qrCodeEmailSubject": {
+      "type": "text"
+    },
+    "qrCodeEmailBody": {
+      "type": "richtext"
+    },
+    "tokenConfirmationEmailSubject": {
+      "type": "text"
+    },
+    "tokenConfirmationEmailBody": {
+      "type": "richtext"
+    }
+  }
+}
