@@ -7,7 +7,7 @@ module.exports = ({ env }) => ({
           icon: 'google',
           key: env('GOOGLE_CLIENT_ID', ''),
           secret: env('GOOGLE_CLIENT_SECRET', ''),
-          callback: env('GOOGLE_CALLBACK_URL', 'http://localhost:1337/api/connect/google/callback'),
+          callback: env('GOOGLE_CALLBACK_URL', '/api/connect/google/callback'), // Reverted to default
           scope: ['email', 'profile']
         },
       },

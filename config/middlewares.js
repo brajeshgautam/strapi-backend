@@ -3,6 +3,7 @@ module.exports = [
   'strapi::errors',
   'strapi::security',
   'strapi::cors',
+  'global::google-callback-handler',
   'strapi::poweredBy',
   'strapi::query',
   'strapi::body',

@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { StrapiApiService } from '../../services/strapi-api.service';
 import { HttpClientModule } from '@angular/common/http';
-import { NgIf, NgForOf, UpperCasePipe, NgClass, JsonPipe } from '@angular/common';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { NgIf, NgForOf, UpperCasePipe, NgClass, JsonPipe, AsyncPipe } from '@angular/common';
+import { RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -11,6 +11,9 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
+
+import { AuthService, UserProfile } from '../../services/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -23,6 +26,7 @@ import { FormsModule } from '@angular/forms';
     RouterLink,
     RouterLinkActive,
     UpperCasePipe,
+    AsyncPipe,
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
@@ -34,16 +38,21 @@ import { FormsModule } from '@angular/forms';
     JsonPipe
   ],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   navigationData: any;
   openDropdownIndex: number | null = null;
   showLogo = true;
   logoUrl = '';
   readonly STRAPI_BASE_URL = 'http://localhost:1337';
+  isLoggedIn$: Observable<boolean>;
+  userProfile$: Observable<UserProfile | null>;
 
-  constructor(private strapiApi: StrapiApiService) {}
+  constructor(private strapiApi: StrapiApiService, private authService: AuthService, private router: Router) {
+    this.isLoggedIn$ = this.authService.loggedInStatus$;
+    this.userProfile$ = this.authService.userProfile$;
+  }
 
   ngOnInit() {
     this.strapiApi.getNavigation().subscribe(data => {
@@ -64,5 +73,13 @@ export class HeaderComponent implements OnInit {
 
   closeDropdown() {
     this.openDropdownIndex = null;
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']); 
+  }
+
+  ngOnDestroy(): void {
   }
 }

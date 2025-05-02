@@ -1,8 +1,9 @@
-import { Component, OnInit, inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { CommonModule, TitleCasePipe } from '@angular/common';
+import { CommonModule, isPlatformBrowser, TitleCasePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { isPlatformBrowser } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
+import { tap, first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-about',
@@ -13,39 +14,69 @@ import { isPlatformBrowser } from '@angular/common';
 })
 export class AboutComponent implements OnInit {
   about: any;
-  private platformId = inject(PLATFORM_ID);
+  isLoading: boolean = false;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private http: HttpClient, 
+    private route: ActivatedRoute,
+    private router: Router,
+    private authService: AuthService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   ngOnInit() {
-    // Check for access_token in the query parameters
-    this.route.queryParams.subscribe(params => {
-      const token = params['access_token']; // Get token from query params
+    if (isPlatformBrowser(this.platformId)) { 
+      this.isLoading = true; 
+      this.route.queryParams.pipe(first()).subscribe(params => { 
+        const token = params['jwt'];
+        const error = params['error'];
+        const message = params['message'];
 
-      if (token) {
-        console.log('Received JWT token via query params:', token);
-        // Only store and navigate if we found a token in query params
-        if (isPlatformBrowser(this.platformId)) { // Add platform check for localStorage
-          localStorage.setItem('jwt_token', token); // Store the token
+        if (token) {
+          console.log('Received JWT token via query params:', token);
+          this.authService.login(token); 
+
+          this.router.navigate([], {
+            relativeTo: this.route,
+            queryParams: {}, 
+            replaceUrl: true 
+          }).then(() => {
+            console.log('Navigating to home after successful login.');
+            this.router.navigate(['/']); 
+          }).catch(err => {
+             console.error('Error navigating after login:', err);
+             this.isLoading = false; 
+          });
+
+        } else if (error) {
+          console.error('OAuth Error received:', decodeURIComponent(message || 'Unknown error'));
+          this.router.navigate([], {
+            relativeTo: this.route,
+            queryParams: {}, 
+            replaceUrl: true
+          }).then(() => {
+             console.log('Navigating to home after login error.');
+             this.router.navigate(['/']); 
+          }).catch(err => {
+            console.error('Error navigating after login error:', err);
+            this.isLoading = false;
+          });
+        } else {
+          console.log('About page loaded without JWT or error params.');
+          this.isLoading = false; 
+          this.fetchAboutData(); 
         }
-        // Remove the query params from URL to keep it clean
-        this.router.navigate([], {
-          relativeTo: this.route,
-          queryParams: { }, // Clear query params
-          replaceUrl: true
-        });
-      } else {
-        // If no token in query params, proceed with existing logic
-        // Ensure this only runs if we *didn't* just process a token
-        this.fetchAboutData();
-      }
-    });
+      });
+    } else {
+       this.fetchAboutData(); 
+    }
   }
 
-  // Extracted data fetching logic into a separate method
   fetchAboutData() {
-    this.http.get<any>('http://localhost:1337/api/about?populate=*').subscribe(res => {
+     console.log('Fetching about page data...');
+     this.http.get<any>('http://localhost:1337/api/about?populate=*').subscribe(res => {
       this.about = Array.isArray(res) ? res[0] : (res.data ? res.data[0] || res.data : res);
+      this.isLoading = false;
     });
   }
 
